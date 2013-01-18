@@ -4,12 +4,11 @@
   "name": "Songza Buy",
   "description": "Buy songs on itunes",
   "version": "1.0",
-  "background": { "scripts": ["jquery-1.8.3.min.js", "background.js"] },
   "content_scripts": [
     {
       "matches": ["http://songza.com/*"],
-      "js": ["buy-button.js"],
-      "css": ["test.css"]
+      "js": ["jquery-1.8.3.min.js", "livereload-1.1.1.js", "buy-button.js"],
+      "css": ["main.css"]
     }
   ],
   "permissions": [
