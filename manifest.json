@@ -4,6 +4,11 @@
   "name": "Songza Enhancement Suite",
   "description": "Provides enhancements to Songza, like a \"Buy on iTunes\" button, and key press events for pausing and skipping songs.",
   "version": "1.0",
+  "icons": {
+    "16": "icon-16x16.png",
+    "48": "icon-48x48.png",
+    "128": "icon-128x128.png"
+  },
   "content_scripts": [
     {
       "matches": ["http://songza.com/*"],
