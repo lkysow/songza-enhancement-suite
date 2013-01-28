@@ -1,10 +1,12 @@
 /* My code */
 var currSongName = '';
 var currSongSelector = '.szi-meta .szi-current-song';
+var badUrls = [];
 
 // loop checking for play page and new song
 setInterval(function() {
   if ($(currSongSelector + ' .szi-song').length > 0 && $(currSongSelector + ' .szi-artist').length > 0 && $('.szi-actions').length > 0 && $(currSongSelector + ' .szi-song').text() != currSongName) {
+    currSongName = $(currSongSelector + ' .szi-song').text();
     updateBuyButton();
   }
 }, 100);
@@ -14,28 +16,40 @@ function updateBuyButton() {
   var artistName = $('.szi-meta .szi-current-song .szi-artist').eq(1).text();
 
   var searchTerm = encodeURI(songName + ' ' + artistName);
+  var searchUrl = 'http://itunes.apple.com/search?term=' + searchTerm;
+  if (badUrls.indexOf(searchUrl) == -1) {
+    $.ajax({
+      url: searchUrl,
+      dataType: "json",
+      success: function(data) {
+        if (data && data.results && data.results[0].trackViewUrl) {
+          var trackUrl = data.results[0].trackViewUrl;
+          if (trackUrl) {
+            trackUrl = trackUrl.replace('https://', 'itmss://');
 
-  $.getJSON('http://itunes.apple.com/search?term=' + searchTerm, function(data) {
-    if (data) {
-      var trackUrl = data.results[0].trackViewUrl;
-      if (trackUrl) {
-        trackUrl = trackUrl.replace('https://', 'itmss://');
-
-        var html = "<div class='lkysow-buy-button'><span class='btn btn-primary'><a class='lkysow-buy-link' href='#' onclick=\'window.location.href=\"" + trackUrl + "\";'>Buy on iTunes</a></span></div>";
-        
-        if ($('.szi-actions .lkysow-buy-button').length == 0) {
-          $('.szi-actions').append(html);
+            var html = "<div class='lkysow-buy-button'><span class='btn btn-primary'><a class='lkysow-buy-link' href='#' onclick=\'window.location.href=\"" + trackUrl + "\";'>Buy on iTunes</a></span></div>";
+            
+            if ($('.szi-actions .lkysow-buy-button').length == 0) {
+              $('.szi-actions').append(html);
+            } else {
+              $('.szi-actions .lkysow-buy-link').attr('onclick', 'window.location.href="' + trackUrl + '"');
+            }  
+          }
         } else {
-          $('.szi-actions .lkysow-buy-link').attr('onclick', 'window.location.href="' + trackUrl + '"');
-        }  
+          badUrls.push(searchUrl);
+        }
+      },
+      error: function(jqXHR, textStatus) {
+        badUrls.push(searchUrl);
       }
-    }
-  });
+    });
+  }
 }
 
 $(document).keypress(function(e) {
   switch(e.which) {
     case 32:
+      // pause on spacebar
       $('.szi-pause').click();
       e.preventDefault();
       break;
@@ -50,7 +64,6 @@ function decrementTimeSinceSkip(intervalId) {
   if (timeSinceLastSwitched > 0) {
     timeSinceLastSwitched--;
   } else {
-    console.log('interval cleared');
     clearInterval(intervalId);
   }
 }
@@ -58,7 +71,7 @@ function decrementTimeSinceSkip(intervalId) {
 $(document).keydown(function(e) {
   switch(e.which) {
     case 39:
-      console.log(timeSinceLastSwitched);
+      // delay for switching so holding down the key 
       if (timeSinceLastSwitched == 0) {
         timeSinceLastSwitched = TIME_BETWEEN_SKIP;
         $('.szi-skip-button').click();
