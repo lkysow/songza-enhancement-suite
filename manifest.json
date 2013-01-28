@@ -7,7 +7,7 @@
   "content_scripts": [
     {
       "matches": ["http://songza.com/*"],
-      "js": ["jquery-1.8.3.min.js", "livereload-1.1.1.js", "buy-button.js"],
+      "js": ["jquery-1.9.0.min.js", "buy-button.js"],
       "css": ["main.css"]
     }
   ],
