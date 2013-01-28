@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Songza Buy",
-  "description": "Buy songs on itunes",
+  "name": "Songza Enhancement Suite",
+  "description": "Provides enhancements to Songza, like a \"Buy on iTunes\" button, and key press events for pausing and skipping songs.",
   "version": "1.0",
   "content_scripts": [
     {
