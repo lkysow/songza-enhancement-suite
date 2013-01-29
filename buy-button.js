@@ -27,13 +27,13 @@ function updateBuyButton() {
           if (trackUrl) {
             trackUrl = trackUrl.replace('https://', 'itmss://');
 
-            var html = "<div class='lkysow-buy-button'><span class='btn btn-primary'><a class='lkysow-buy-link' href='#' onclick=\'window.location.href=\"" + trackUrl + "\";'>Buy on iTunes</a></span></div>";
-            
+            var html = "<a class='szi-control lkysow-buy-button lkysow-buy-link' href='#' onclick=\'window.location.href=\"" + trackUrl + "\";'><span class='btn btn-primary'>Buy on iTunes</span></a>";
+
             if ($('.szi-actions .lkysow-buy-button').length == 0) {
               $('.szi-actions').append(html);
             } else {
               $('.szi-actions .lkysow-buy-link').attr('onclick', 'window.location.href="' + trackUrl + '"');
-            }  
+            }
           }
         } else {
           badUrls.push(searchUrl);
@@ -71,11 +71,11 @@ function decrementTimeSinceSkip(intervalId) {
 $(document).keydown(function(e) {
   switch(e.which) {
     case 39:
-      // delay for switching so holding down the key 
+      // delay for switching so holding down the key
       if (timeSinceLastSwitched == 0) {
         timeSinceLastSwitched = TIME_BETWEEN_SKIP;
         $('.szi-skip-button').click();
-        
+
         var id = setInterval(function() {
           decrementTimeSinceSkip(id);
         }, 1);
