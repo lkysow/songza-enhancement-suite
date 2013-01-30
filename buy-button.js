@@ -1,4 +1,3 @@
-/* My code */
 var currSongName = '';
 var currSongSelector = '.szi-meta .szi-current-song';
 var badUrls = [];
@@ -47,6 +46,8 @@ function updateBuyButton() {
 }
 
 var timeSinceLastSwitched = 0;
+
+// Time user must wait before pressing the 'switch song' key will switch the song (ms)
 var TIME_BETWEEN_SKIP = 500;
 
 // decrement the time since last switched counter until it's 0, then clear the interval
@@ -58,6 +59,7 @@ function decrementTimeSinceSkip(intervalId) {
   }
 }
 
+// Event ids for keys
 var KEYS = {
   spaceBar: 32,
   rightArrow: 39
@@ -73,7 +75,7 @@ $(document).on('keypress keydown', function(e) {
     break;
 
     case KEYS.rightArrow:
-      // delay for switching so holding down the key
+      // don't trigger switch song if the has already done so recently
       if (timeSinceLastSwitched == 0) {
         timeSinceLastSwitched = TIME_BETWEEN_SKIP;
         $('.szi-skip-button').trigger('click');
