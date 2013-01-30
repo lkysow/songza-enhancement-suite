@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": ["http://songza.com/*"],
-      "js": ["jquery-1.9.0.min.js", "buy-button.js"],
+      "js": ["zepto.min.js", "buy-button.js"],
       "css": ["main.css"]
     }
   ],
