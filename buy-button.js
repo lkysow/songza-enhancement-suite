@@ -46,16 +46,6 @@ function updateBuyButton() {
   }
 }
 
-$(document).keypress(function(e) {
-  switch(e.which) {
-    case 32:
-      // pause on spacebar
-      $('.szi-pause').click();
-      e.preventDefault();
-      break;
-  }
-});
-
 var timeSinceLastSwitched = 0;
 var TIME_BETWEEN_SKIP = 500;
 
@@ -68,18 +58,30 @@ function decrementTimeSinceSkip(intervalId) {
   }
 }
 
-$(document).keydown(function(e) {
-  switch(e.which) {
-    case 39:
+var KEYS = {
+  spaceBar: 32,
+  rightArrow: 39
+};
+
+$(document).on('keypress keydown', function(e) {
+  switch (e.which) {
+
+    case KEYS.spaceBar:
+      e.preventDefault();
+      // pause on spacebar
+      $('.szi-pause').trigger('click');
+    break;
+
+    case KEYS.rightArrow:
       // delay for switching so holding down the key
       if (timeSinceLastSwitched == 0) {
         timeSinceLastSwitched = TIME_BETWEEN_SKIP;
-        $('.szi-skip-button').click();
+        $('.szi-skip-button').trigger('click');
 
         var id = setInterval(function() {
           decrementTimeSinceSkip(id);
         }, 1);
       }
-      break;
+    break;
   }
 });
