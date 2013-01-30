@@ -63,16 +63,15 @@ var KEYS = {
   rightArrow: 39
 };
 
-$(window).on('keypress', function(e) {
-  switch(e.which) {
+$(document).on('keypress keydown', function(e) {
+  switch (e.which) {
+
     case KEYS.spaceBar:
+      e.preventDefault();
       // pause on spacebar
       $('.szi-pause').trigger('click');
-      e.preventDefault();
-      break;
-  }
-}).on('keydown', function(e) {
-  switch(e.which) {
+    break;
+
     case KEYS.rightArrow:
       // delay for switching so holding down the key
       if (timeSinceLastSwitched == 0) {
@@ -83,6 +82,6 @@ $(window).on('keypress', function(e) {
           decrementTimeSinceSkip(id);
         }, 1);
       }
-      break;
+    break;
   }
 });
