@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": ["http://songza.com/*"],
-      "js": ["zepto.min.js", "buy-button.js"],
+      "js": ["zepto.min.js", "lodash.min.js", "buy-button.js", "keymaster.min.js", "key-bindings.js"],
       "css": ["main.css"]
     }
   ],
