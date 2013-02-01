@@ -1,8 +1,13 @@
 var togglePause = function() {
-  $('.szi-pause').trigger('click');
+  if ($('.szi-pause-button').css('display') != 'none') {
+    $('.szi-pause-button').trigger('click');
+  } else {
+    $('.szi-play-button').trigger('click');
+  }
 };
 
 key('space', function(ev) {
+  // don't trigger pause event on space if user has focus on an input
   if (document.activeElement.tagName != "INPUT") {
     togglePause();
     return false;
