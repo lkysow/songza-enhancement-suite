@@ -3,8 +3,10 @@ var togglePause = function() {
 };
 
 key('space', function(ev) {
-  togglePause();
-  return false;
+  if (document.activeElement.tagName != "INPUT") {
+    togglePause();
+    return false;
+  }
 });
 
 var skipSong = function() {
