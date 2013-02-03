@@ -3,18 +3,45 @@ $(function() {
   var app;
 
   var btnText = 'Buy on iTunes';
-  var btnTmpl = '<a id="buy-button" class="btn btn-primary" target="_blank">' + btnText + '</a>';
+  var btnTmpl = '<div id="buy-button" class="btn btn-primary">' + btnText + '</div>';
   var btnInstance = $(btnTmpl);
 
   var searchApi = 'http://itunes.apple.com/search';
 
+  var getSongInfo = function() {
+    var player = app.getPlayer();
+    if (!player) return;
+    return app.getPlayer().model.get("current").toJSON();
+  };
 
-  var iTunesLink = function() {
-    return 'https://itunes.apple.com/us/album/gangnam-style-gangnamseutail/id560398387';
+  var refineSearchTerm = function(songInfo) {
+    return songInfo.title;
+  };
+
+  var queryItunes = function(callback) {
+    var songInfo = getSongInfo();
+    if (!songInfo) return;
+
+    $.ajax({
+      dataType: 'jsonp',
+      url: searchApi,
+      data: {
+        media: 'music',
+        limit: 1,
+        term: refineSearchTerm(songInfo)
+      }
+    }).done(function(data) {
+      if (!data.resultCount) return;
+      callback(data.results[0].trackViewUrl);
+    });
   };
 
   var updateBtn = function() {
-    btnInstance.attr('href', iTunesLink());
+    queryItunes(function(trackViewUrl) {
+      btnInstance.off('click').on('click', function() {
+        return its.detect.openItunes(trackViewUrl);
+      });
+    });
   };
 
   var createBtn = function() {
