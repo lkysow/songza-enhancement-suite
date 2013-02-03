@@ -11,7 +11,9 @@ $(function() {
   var getSongInfo = function() {
     var player = app.getPlayer();
     if (!player) return;
-    return app.getPlayer().model.get("current").toJSON();
+    var current = app.getPlayer().model.get("current");
+    if (!current) return;
+    return current.toJSON();
   };
 
   var refineSearchTerm = function(songInfo) {
