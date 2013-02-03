@@ -17,7 +17,7 @@ $(function() {
   };
 
   var refineSearchTerm = function(songInfo) {
-    return songInfo.title;
+    return [songInfo.title, songInfo.artist].join(' ');
   };
 
   var queryItunes = function(callback) {
