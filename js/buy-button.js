@@ -24,17 +24,21 @@ $(function() {
     var songInfo = getSongInfo();
     if (!songInfo) return;
 
+    window.itunesCallback = function(data) {
+      if (!data.resultCount) return;
+      callback(data.results[0].trackViewUrl);
+    };
+
     $.ajax({
       dataType: 'jsonp',
       url: searchApi,
+      jsonpCallback: 'itunesCallback',
+      cache: true,
       data: {
         media: 'music',
         limit: 1,
         term: refineSearchTerm(songInfo)
       }
-    }).done(function(data) {
-      if (!data.resultCount) return;
-      callback(data.results[0].trackViewUrl);
     });
   };
 
