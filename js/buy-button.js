@@ -42,10 +42,16 @@
     });
   };
 
+  var openItunes = function(url) {
+    console.log(url);
+    url = url.replace(/^http/, 'itms');
+    window.location.href = url;
+  };
+
   var updateBtn = function() {
     queryItunes(function(trackViewUrl) {
       btnInstance.off('click').on('click', function() {
-        return its.detect.openItunes(trackViewUrl);
+        return openItunes(trackViewUrl);
       });
     });
   };
