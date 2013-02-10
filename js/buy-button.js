@@ -1,4 +1,4 @@
-$(function() {
+(function() {
 
   var app;
 
@@ -66,7 +66,9 @@ $(function() {
         createBtn();
       });
 
+      createBtn();
+
     });
   });
 
-});
+}());
