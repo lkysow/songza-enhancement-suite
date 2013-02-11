@@ -52,14 +52,14 @@
     toggleBtn(true);
   };
 
-  var enabledBtn = function() {
+  var enableBtn = function() {
     toggleBtn(false);
   };
 
   var updateBtn = function() {
     queryItunes(function(data) {
       if (data.resultCount) {
-        enabledBtn();
+        enableBtn();
         btnInstance.on('click', function() {
           return openItunes(data.results[0].trackViewUrl);
         });
