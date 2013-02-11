@@ -1,22 +1,21 @@
 {
   "manifest_version": 2,
-
   "name": "Songza Enhancement Suite",
   "description": "Provides enhancements to Songza like a \"Buy on iTunes\" button, and hotkeys for pausing and skipping songs.",
   "version": "1.0.4",
   "icons": {
-    "16": "icon-16.png",
-    "48": "icon-48.png",
-    "128": "icon-128.png"
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
   },
-  "content_scripts": [
-    {
-      "matches": ["http://songza.com/*"],
-      "js": ["zepto.min.js", "lodash.min.js", "buy-button.js", "keymaster.min.js", "key-bindings.js"],
-      "css": ["main.css"]
-    }
-  ],
-  "permissions": [
-    "http://itunes.apple.com/"
+  "content_scripts": [{
+    "matches": ["http://songza.com/*"],
+    "js": ["songza-enhancement-suite.js"],
+    "css": ["songza-enhancement-suite.css"]
+  }],
+  "web_accessible_resources": [
+    "js/vendor/keymaster.min.js",
+    "js/buy-button.js",
+    "js/key-bindings.js"
   ]
 }
