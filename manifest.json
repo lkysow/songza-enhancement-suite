@@ -15,7 +15,7 @@
   }],
   "web_accessible_resources": [
     "js/vendor/keymaster.min.js",
-    "js/buy-button.js",
+    "js/main.js",
     "js/key-bindings.js"
   ]
 }
