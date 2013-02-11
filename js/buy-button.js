@@ -40,7 +40,6 @@
   };
 
   var openItunes = function(url) {
-    console.log(url);
     url = url.replace(/^http/, 'itms');
     window.location.href = url;
   };
