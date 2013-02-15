@@ -1,4 +1,4 @@
-$(function() {
+(function() {
 
   var app;
 
@@ -15,6 +15,10 @@ $(function() {
 
   var throttledSkip = _.throttle(skip, 300);
 
+  var focusSearchInput = function() {
+    $('#search-query').focus();
+  };
+
   require(["songza/app"], function(App) {
     App.postInit(function() {
 
@@ -28,7 +32,11 @@ $(function() {
         return !!throttledSkip();
       });
 
+      key('/', function() {
+        return !!focusSearchInput();
+      });
+
     });
   });
 
-});
+}());
