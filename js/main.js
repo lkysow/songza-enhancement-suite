@@ -6,7 +6,7 @@
   var btnTmpl = '<div id="buy-button" class="btn btn-primary disabled">' + btnText + '</div>';
   var btnInstance = $(btnTmpl);
 
-  var searchApi = 'http://itunes.apple.com/search';
+  var searchApi = '//itunes.apple.com/search';
 
   var getSongInfo = function() {
     var player = app.getPlayer();
@@ -20,14 +20,15 @@
     return [songInfo.title, songInfo.artist].join(' ');
   };
 
-  var memoizedAjax = _.memoize(function(songInfo) {
+  var memoizedAjax = _.memoize(function(searchTerm) {
     return $.ajax({
       dataType: 'jsonp',
       url: searchApi,
       data: {
         media: 'music',
+        entity: 'song',
         limit: 1,
-        term: songInfo
+        term: searchTerm
       }
     });
   });
