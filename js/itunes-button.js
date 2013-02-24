@@ -89,6 +89,7 @@
     App.postInit(function() {
 
       app = App.getInstance();
+      setStatus();
 
       app.bind('all', function() {
         createBtn();

@@ -17,7 +17,7 @@
     "img/icon-128.png",
     "js/vendor/keymaster.min.js",
     "js/options.js",
-    "js/main.js",
+    "js/itunes-button.js",
     "js/key-bindings.js"
   ]
 }
