@@ -14,8 +14,10 @@
     "css": ["songza-enhancement-suite.css"]
   }],
   "web_accessible_resources": [
+    "img/icon-128.png",
     "js/vendor/keymaster.min.js",
-    "js/main.js",
+    "js/options.js",
+    "js/itunes-button.js",
     "js/key-bindings.js"
   ]
 }

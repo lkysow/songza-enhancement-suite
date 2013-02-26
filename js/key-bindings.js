@@ -1,5 +1,11 @@
 (function() {
 
+  var enhancementId = 'key-bindings';
+  var enabled;
+  var setStatus = function() {
+    enabled = $.cookie(enhancementId) === null;
+  };
+
   var app;
 
   var toggle = function() {
@@ -23,18 +29,21 @@
     App.postInit(function() {
 
       app = App.getInstance();
+      setStatus();
 
       key('space', function() {
-        return !!toggle();
+        if (enabled) return !!toggle();
       });
 
       key('right', function() {
-        return !!throttledSkip();
+        if (enabled) return !!throttledSkip();
       });
 
       key('/', function() {
-        return !!focusSearchInput();
+        if (enabled) return !!focusSearchInput();
       });
+
+      $(document.body).on(enhancementId, setStatus);
 
     });
   });

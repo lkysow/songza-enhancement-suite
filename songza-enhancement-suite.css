@@ -1,7 +1,117 @@
+#ses-options {
+  border-right: 1px solid #D7D7D7;
+  padding-right: 1em;
+  margin-right: 1em;
+}
+
+#ses-options:after {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 3px solid #bbb;
+  top: 0px;
+  left: 5px;
+  position: relative;
+}
+
+#ses-options-menu {
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+  background: rgba(242,243,244,0.98);
+  width: 550px;
+  min-height: 215px;
+  padding: 10px;
+  z-index: 800;
+  border: 1px solid #bbb;
+}
+
+#ses-options-menu:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 13px solid #bbb;
+  top: -27px;
+  left: 102px;
+  position: relative;
+}
+
+.ses-options {
+  width: 150px;
+  float: left;
+}
+
+.ses-options a {
+  color: #333;
+  -webkit-transition-property: background-color;
+  width: 90%;
+  display: block;
+  padding: 0.5em;
+  border-top: 1px dotted #ccc;
+  text-decoration: none;
+}
+
+.ses-options a:hover {
+  background: rgba(214,217,221,0.98);
+  color: #4d4d4d;
+}
+
+.status {
+  border-radius: 4px;
+  float: right;
+  padding: 1px 3px;
+  font-size: 10px;
+  color: #fafafa;
+  vertical-align: middle;
+}
+
+.status.enabled {
+  background: #468847;
+}
+
+.status.disabled {
+  background: #b94a48;
+}
+
 #buy-button {
   margin: 0 0 0 10px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 #buy-button.disabled {
   cursor: not-allowed;
+}
+
+#buy-button.hidden {
+  display: none;
+}
+
+.ses-icon {
+  /* see https://developer.chrome.com/extensions/i18n.html */
+  background: url('chrome-extension://__MSG_@@extension_id__/img/icon-128.png');
+  background-size: 100%;
+}
+
+#ses-options-menu .ses-icon {
+  width: 50px;
+  height: 50px;
+  padding: 0.5em;
+  display: block;
+  vertical-align: middle;
+}
+
+#header .ses-icon {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  line-height: 17px;
+  vertical-align: text-top;
+  background-repeat: no-repeat;
 }

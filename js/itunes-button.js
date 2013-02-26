@@ -1,5 +1,11 @@
 (function() {
 
+  var enhancementId = 'itunes-button';
+  var enabled;
+  var setStatus = function() {
+    enabled = $.cookie(enhancementId) === null;
+  };
+
   var app;
 
   var btnText = 'Buy on iTunes';
@@ -58,6 +64,8 @@
   };
 
   var updateBtn = function() {
+    btnInstance.toggleClass('hidden', !enabled);
+
     queryItunes(function(data) {
       if (data.resultCount) {
         enableBtn();
@@ -81,12 +89,18 @@
     App.postInit(function() {
 
       app = App.getInstance();
+      setStatus();
 
       app.bind('all', function() {
         createBtn();
       });
 
       createBtn();
+
+      $(document.body).on(enhancementId, function() {
+        setStatus();
+        updateBtn();
+      });
 
     });
   });
