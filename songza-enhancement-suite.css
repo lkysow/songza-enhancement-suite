@@ -81,10 +81,16 @@
 
 #buy-button {
   margin: 0 0 0 10px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 #buy-button.disabled {
   cursor: not-allowed;
+}
+
+#buy-button.hidden {
+  display: none;
 }
 
 .ses-icon {

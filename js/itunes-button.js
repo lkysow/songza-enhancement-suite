@@ -64,7 +64,7 @@
   };
 
   var updateBtn = function() {
-    btnInstance.toggle(enabled);
+    btnInstance.toggleClass('hidden', !enabled);
 
     queryItunes(function(data) {
       if (data.resultCount) {
