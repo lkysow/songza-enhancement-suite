@@ -1,7 +1,7 @@
 (function() {
 
   var btnTooltip = 'Songza Enhancement Suite Options';
-  var btnTmpl = '<li id="ses-options"><a class="btn sz-tooltip" data-original-title="' + btnTooltip + '"><i class="icon-cog"></i></a></li>';
+  var btnTmpl = '<li id="ses-options"><a class="btn sz-tooltip" data-original-title="' + btnTooltip + '"><i class="icon ses-icon"></i></a></li>';
   var $btn = $(btnTmpl);
 
   var menuId = 'ses-options-menu';
