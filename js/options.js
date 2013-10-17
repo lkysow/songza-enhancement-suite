@@ -87,4 +87,8 @@
     }
   });
 
+  window.onbeforeunload = function() {
+    return 'Leaving will cause you to lose your place in this playlist.';
+  };
+
 }());
