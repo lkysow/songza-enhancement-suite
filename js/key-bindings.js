@@ -3,7 +3,7 @@
   var enhancementId = 'key-bindings';
   var enabled;
   var setStatus = function() {
-    enabled = $.cookie(enhancementId) === null;
+    enabled = $.cookie(enhancementId) === 'enabled';
   };
 
   var app;

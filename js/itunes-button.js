@@ -3,7 +3,7 @@
   var enhancementId = 'itunes-button';
   var enabled;
   var setStatus = function() {
-    enabled = $.cookie(enhancementId) === null;
+    enabled = $.cookie(enhancementId) === 'enabled';
   };
 
   var app;

@@ -10,10 +10,16 @@
 
   var options = {
     'itunes-button': {
-      'text': 'Buy Button'
+      'text': 'Buy Button',
+      'default': 'enabled'
     },
     'key-bindings': {
-      'text': 'Hotkeys'
+      'text': 'Hotkeys',
+      'default': 'enabled'
+    },
+    'confirm-unload': {
+      'text': 'Confirm When Leaving Page',
+      'default': 'disabled'
     }
   }
 
@@ -40,27 +46,27 @@
   var generateOption = function(optionId, optionInfo) {
     return $(optionTmpl({
       'optionId': optionId,
-      'optionStatus': $.cookie(optionId) === null ? statusTmpl.enabled : statusTmpl.disabled,
+      'optionStatus': $.cookie(optionId) === 'enabled' ? statusTmpl.enabled : statusTmpl.disabled,
       'optionText': optionInfo.text
     })).on('click', toggleOption);
   };
 
-  var toggleOption = function(ev) {
+  var setCookie = function(name, value) {
+    $.cookie(name, value, {
+      expires: 365,
+      path: '/'
+    });
+  };
 
+  var toggleOption = function(ev) {
     var $option = $(ev.currentTarget);
     var optionId = $option.attr('id');
-    var enabled = $.cookie(optionId) === null;
+    var enabled = $.cookie(optionId) === 'enabled';
 
     if (enabled) {
-      $.cookie(optionId, 'disabled', {
-        expires: 365,
-        path: '/'
-      });
+      setCookie(optionId, 'disabled');
     } else {
-      $.cookie(optionId, '', {
-        expires: -1,
-        path: '/'
-      });
+      setCookie(optionId, 'enabled');
     }
 
     $option.replaceWith(generateOption(optionId, {
@@ -77,14 +83,30 @@
     });
   };
 
+  /**
+   * If cookies haven't been set yet, meaning this is the very first use,
+   * set options to their defaults
+   */
+  var setOptionDefaults = function() {
+    $.each(options, function(optionId, optionInfo) {
+      if ($.cookie(optionId) === null) {
+        setCookie(optionId, optionInfo.default);
+      }
+    });
+  };
+
+  var hideOptionsMenuOnPageClick = function() {
+    $(document.body).on('click', function(ev) {
+      var ids = _.union(_.keys(options), [menuId]);
+      if (!_.contains(ids, ev.target.id)) {
+        $menu.hide();
+      }
+    });
+  };
+
   $('#header .szi-auth').prepend($btn);
+  setOptionDefaults();
   populateMenu();
   $btn.on('click', toggleMenu);
-  $(document.body).on('click', function(ev) {
-    var ids = _.union(_.keys(options), [menuId]);
-    if (!_.contains(ids, ev.target.id)) {
-      $menu.hide();
-    }
-  });
-
+  hideOptionsMenuOnPageClick();
 }());

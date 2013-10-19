@@ -18,6 +18,7 @@
     "js/vendor/keymaster.min.js",
     "js/options.js",
     "js/itunes-button.js",
-    "js/key-bindings.js"
+    "js/key-bindings.js",
+    "js/confirm-unload.js"
   ]
 }
