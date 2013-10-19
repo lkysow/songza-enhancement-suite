@@ -97,8 +97,14 @@
 
   var hideOptionsMenuOnPageClick = function() {
     $(document.body).on('click', function(ev) {
+      $target = $(ev.target);
+      if ($target.prop('tagName') === 'SPAN') {
+        // if clicking on checkmark the target will be the span, so need to look at parent
+        $target = $target.parent();
+      }
+
       var ids = _.union(_.keys(options), [menuId]);
-      if (!_.contains(ids, ev.target.id)) {
+      if (!_.contains(ids, $target.attr('id'))) {
         $menu.hide();
       }
     });
