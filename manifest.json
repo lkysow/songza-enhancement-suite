@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Songza Enhancement Suite",
   "description": "Provides enhancements to Songza like a \"Buy on iTunes\" button, and hotkeys for pausing and skipping songs.",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "icons": {
     "16": "img/icon-16.png",
     "48": "img/icon-48.png",
