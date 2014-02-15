@@ -11,7 +11,7 @@
   var toggle = function() {
     var player = app.getPlayer();
     if (!player) return;
-    player.model.get('state') === 'play' ? player.pause() : player.play();
+    player.model.get('playState') === 'play' ? player.pause() : player.play();
   };
 
   var skip = function() {
